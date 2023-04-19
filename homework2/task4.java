@@ -12,7 +12,7 @@ public class task4 {
     public static void main(String[] args) throws SecurityException, IOException {
         Logger lg = Logger.getLogger(task1.class.getName());
         lg.setLevel(Level.INFO);
-        FileHandler fh = new FileHandler("/src/log.txt");
+        FileHandler fh = new FileHandler("./src/log.txt");
         lg.addHandler(fh);
         SimpleFormatter sf = new SimpleFormatter();
         fh.setFormatter(sf);
@@ -29,7 +29,7 @@ public class task4 {
         }
 
         try{
-            File file = new File("/src/result.txt");
+            File file = new File("./src/result.txt");
             FileWriter fr = new FileWriter(file, true);
             fr.write(String.valueOf(in)+"\n");
             System.out.println(String.valueOf(in));

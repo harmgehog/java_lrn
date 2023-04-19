@@ -12,7 +12,7 @@ public class task6 {
 
     static {
         try {
-            fh = new FileHandler("/src/log.txt");
+            fh = new FileHandler("./src/log.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -19,7 +19,7 @@ public class task5 {
     // 5) удаляет сохраненный файл
     public static void main(String[] args) throws IOException {
         Logger lg = Logger.getLogger(task1.class.getName());
-        FileHandler fh = new FileHandler("/src/log.txt");
+        FileHandler fh = new FileHandler("./src/log.txt");
         lg.addHandler(fh);
         SimpleFormatter sf = new SimpleFormatter();
         fh.setFormatter(sf);
