@@ -9,7 +9,7 @@ public class task2 {
         System.out.println("Выводим список: \n" + myList.getL());
 
         myList.enqueue(17);
-        System.out.println("Поместить в конец элемент '55'\n" + myList.getL());
+        System.out.println("Поместить в конец элемент '17'\n" + myList.getL());
 
         int deleteFirst = myList.dequeue();
         System.out.printf("Возврат и удаление первого элемента %d:\n", deleteFirst);
