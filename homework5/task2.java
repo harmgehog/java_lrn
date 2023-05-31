@@ -25,7 +25,7 @@ public class task2 {
         }
 
         for (Map.Entry<Integer, String> item : rslt.entrySet()) {
-            System.out.println(item.getValue().toString() + " - " + item.getKey());
+            System.out.println(item.getValue() + " - " + item.getKey());
         }
     }
 }

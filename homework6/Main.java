@@ -1,115 +1,72 @@
 package homework6;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+
 
 public class Main {
     public static void main(String[] args) {
-        // Подумать над структурой класса Ноутбук для магазина техники - выделить поля и
-        // методы. Реализовать в java.
-        // Создать множество ноутбуков.
 
-        Laptop nb1 = new Laptop(4, 1024, "Windows", "black");
-        Laptop nb2 = new Laptop(8, 2048, "Linux", "red");
-        Laptop nb3 = new Laptop(8, 4096, "MacOs", "blue");
-        Laptop nb4 = new Laptop(32, 512, "Windows", "red");
-        Laptop nb5 = new Laptop(64, 2048, "Linux", "yellow");
+        Set<Laptop> setLaptops = new HashSet<>();
+
+        setLaptops.add(new Laptop("Asus", "Ng2", 8512, 1024, "Windows", "Intel i5", "serial number 1"));
+        setLaptops.add(new Laptop("Asus", "Nge4", 12512, 2024, "Ubuntu", "Intel i7", "serial number 2"));
+        setLaptops.add(new Laptop("HP", "Hpavillion", 512, 512, "Windows", "AMD SX", "serial number 3"));
+        setLaptops.add(new Laptop("Xiaomi", "Mibook", 2512, 1024, "Ubuntu", "AMD FX", "serial number 4"));
+        setLaptops.add(new Laptop("Huawei", "pro max ultra super xs", 2512, 1024, "Windows", "Intel i5", "serial number 5"));
+        setLaptops.add(new Laptop("Sony", "VAIO", 512, 512, "Windows", "Intel i3", "serial number 6"));
+
+        setLaptops.add(new Laptop("Asus", "Ng2", 8512, 1024, "Windows", "Intel i5", "serial number 1"));
+        setLaptops.add(new Laptop("Xiaomi", "Mibook", 2512, 1024, "Ubuntu", "AMD FX", "serial number 4"));
 
 
-        Set<Laptop> laptops = new HashSet<>();
-        laptops.add(nb1);
-        laptops.add(nb2);
-        laptops.add(nb3);
-        laptops.add(nb4);
-        laptops.add(nb5);
-
-        for (Laptop lp : laptops) {
-            System.out.println(lp);
-        }
-
-        filtration(laptops);
-
+        setLaptopsFiltration(setLaptops, createFilter());
     }
 
-    static void filtration(Set<Laptop> laptops) {
+    public static void setLaptopsFiltration(Set<Laptop> setLaptops, Laptop filterLaptop) {
+        for (Laptop n : setLaptops) {
+            if (n.getBrand().contains(filterLaptop.getBrand()) &&
+                    n.getModel().contains(filterLaptop.getModel()) &&
+                    n.getRam() >= filterLaptop.getRam() &&
+                    n.getDisk() >= filterLaptop.getDisk() &&
+                    n.getOs().contains(filterLaptop.getOs()) &&
+                    n.getCpu().contains(filterLaptop.getCpu()) &&
+                    n.getSerial().contains(filterLaptop.getSerial()))
+                System.out.println(n);
+        }
+    }
+
+    public static Laptop createFilter() {
+        Laptop filterLaptop = new Laptop("", "", 0, 0, "", "", "");
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Введите минимальный объем оперативной памяти или 0 ");
-        int par1 = scanner.nextInt();
-
-        System.out.println("Введите минимальный объем жесткого диска или 0");
-        int par2 = scanner.nextInt();
-
-        System.out.println(
-                "Выберите ОС 0 не имеет значения 1 Windows 2 Linux 3 MacOs");
-        int par03 = scanner.nextInt();
-        String par3 = null;
-        if (par03 == 1) {
-            par3 = "Windows";
-        }
-        if (par03 == 2) {
-            par3 = "Linux";
-        }
-        if (par03 == 3) {
-            par3 = "MacOs";
-        }
-
-        System.out.println(
-                "Введите цвет Ноутбука 0 без разницы 1 черный 2 красный 3 синий 4) желтый");
-        int par04 = scanner.nextInt();
-        String par4 = null;
-        if (par04 == 1) {
-            par4 = "black";
-        }
-        if (par04 == 2) {
-            par4 = "red";
-        }
-        if (par04 == 3) {
-            par4 = "blue";
-        }
-        if (par04 == 4) {
-            par4 = "yellow";
-        }
-
-        Laptop idealLP = new Laptop(par1, par2, par3, par4);
-
-
-        Set<Laptop> idealLp = new HashSet<>();
-
-        for (Laptop lp : laptops) {
-            if (lp.getRam() >= idealLP.getRam()
-                    && lp.getHardDrive() >= idealLP.getHardDrive()) {
-                if (idealLP.getOperationSystem() == null) {
-                    if (idealLP.getColour() == null) {
-                        idealLp.add(lp);
-                    } else {
-                        if (lp.getColour().equals(idealLP.getColour())) {
-                            idealLp.add(lp);
-                        }
-                    }
-
-                } else {
-                    if (lp.getOperationSystem().equals(idealLP.getOperationSystem())
-                            && idealLP.getColour() == null) {
-                        idealLp.add(lp);
-                    } else {
-                        if (lp.getOperationSystem().equals(idealLP.getOperationSystem())
-                                && idealLP.getColour().equals(lp.getColour())) {
-                            idealLp.add(lp);
-                        }
-                    }
-                }
-
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Выберите параметры:");
+            System.out.println("1 - Производитель");
+            System.out.println("2 - Модель");
+            System.out.println("3 - ОЗУ");
+            System.out.println("4 - Накопитель");
+            System.out.println("5 - OC");
+            System.out.println("6 - Процессор");
+            System.out.println("7 - S/N");
+            System.out.println("Любая другая цифра - Применить фильтр");
+            System.out.print("-->");
+            switch (scanner.nextInt()) {
+                case 1 -> filterLaptop.setBrand(parameterValue("Производитель"));
+                case 2 -> filterLaptop.setModel(parameterValue("Модель"));
+                case 3 -> filterLaptop.setRam(Integer.parseInt(parameterValue("ОЗУ в МБайтах")));
+                case 4 -> filterLaptop.setDisk(Integer.parseInt(parameterValue("Накопитель в МБайтах")));
+                case 5 -> filterLaptop.setOs(parameterValue("ОС"));
+                case 6 -> filterLaptop.setCpu(parameterValue("Процессор"));
+                case 7 -> filterLaptop.setSerial(parameterValue("S/N:"));
+                default -> flag = false;
             }
-
         }
-
-        System.out.println("Подходящий ноут: ");
-        for (Laptop el : idealLp) {
-            System.out.println(el);
-        }
-
+        return filterLaptop;
     }
 
+    private static String parameterValue(String text) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Значение " + text + ":");
+        return scanner.nextLine();
+    }
 }
